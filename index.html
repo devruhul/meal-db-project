@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API</title>
+    <link rel="stylesheet" href="css/country.css" />
+  </head>
+  <body>
+    <h3>Hello API!!!</h3>
+    <!-- Country -->
+    <section>
+      <h3>Country Details</h3>
+      <div id="country-details"></div>
+    </section>
+
+    <!-- quotes -->
+
+    <button onclick="loadQuotes()">Quote Generator</button>
+
+    <blockquote id="fav-quote"></blockquote>
+
+    <button onclick="loadBuddies()">Random user Generator</button>
+
+    <button onclick="loadCountries()">countries</button>
+    <section id="all-countries"></section>
+    <div id="buddies"></div>
+
+    <section id="section"></section>
+
+    <ul id="users"></ul>
+    <ul id="albums"></ul>
+
+    <button onclick="loadData()">Load Data</button>
+    <button onclick="loadUsers()">Load Users</button>
+    <button onclick="loadPosts()">Load Posts</button>
+    <button onclick="loadAlbums()">Load Albums</button>
+
+    <script src="js/api.js"></script>
+  </body>
+</html>
