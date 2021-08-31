@@ -17,7 +17,7 @@ html {
   border-radius: 10px;
 }
 
-.bg {
+#bg {
   background-image: url("image/anna-pelzer.jpg");
   height: 100%;
   background-position: center;

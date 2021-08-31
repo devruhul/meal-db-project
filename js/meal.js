@@ -1,18 +1,39 @@
 
 // get search button
-const searchFood = () => {
+const searchFood = async () => {
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
     searchField.value = '';
+    const img = document.getElementById('bg');
+    img.style.display = 'none';
+    const errorMessage = document.getElementById('error-message');
+    errorMessage.innerText = '';
 
-    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displayResult(data.meals));
+    if (searchText.length == '') {
+        const errorMessage = document.getElementById('error-message');
+        errorMessage.innerText = 'No results found';
+    }
+    else {
+        const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
+
+        const res = await fetch(url);
+        const data = await res.json();
+        displayResult(data.meals);
+
+        // fetch(url)
+        //     .then(res => res.json())
+        //     .then(data => displayResult(data.meals));
+    }
+
 };
 // display result
 const displayResult = meals => {
     const searchResult = document.getElementById('search-result');
+    searchResult.textContent = '';
+    if (meals.length == 0) {
+        const errorMessage = document.getElementById('error-message');
+        errorMessage.innerText = 'No results found';
+    }
     meals.forEach(meal => {
         const div = document.createElement('div');
         div.classList.add('col');
@@ -29,19 +50,27 @@ const displayResult = meals => {
     });
 };
 // load each meal detail
-const loadMealDetail = mealId => {
+const loadMealDetail = async mealId => {
     const url = `
         https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}
     `;
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displayMealDetails(data.meals[0]));
-    // display meal details
-    const displayMealDetails = meal => {
-        const mealDetails = document.getElementById('meal-details');
-        const div = document.createElement('div');
-        div.classList.add('card');
-        div.innerHTML = `
+
+    const res = await fetch(url);
+    const data = await res.json();
+    displayMealDetails(data.meals[0]);
+};
+
+// fetch(url)
+//     .then(res => res.json())
+//     .then(data => displayMealDetails(data.meals[0]));
+
+// display meal details
+const displayMealDetails = meal => {
+    const mealDetails = document.getElementById('meal-details');
+    mealDetails.textContent = '';
+    const div = document.createElement('div');
+    div.classList.add('card');
+    div.innerHTML = `
             <img  src="${meal.strMealThumb}" class="card-img-top" alt="..." />
             <div class="card-body">
                 <h5 class="card-title">${meal.strMeal}</h5>
@@ -49,7 +78,6 @@ const loadMealDetail = mealId => {
                 <a href="${meal.strYoutube}" class="btn btn-primary">Go somewhere</a>
             </div>
         `;
-        mealDetails.appendChild(div);
-    };
-
+    mealDetails.appendChild(div);
 };
+
