@@ -3,20 +3,6 @@ html {
   height: 100%;
   margin: 0;
 }
-
-#all-countries {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-.country {
-  border: 2px solid salmon;
-  background-color: slategrey;
-  padding: 1.2rem;
-  margin: 2rem;
-  color: white;
-  border-radius: 10px;
-}
-
 #bg {
   background-image: url("image/anna-pelzer.jpg");
   height: 100%;
